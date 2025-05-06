@@ -1,0 +1,45 @@
+const char imgFile[][30] = {
+	"Textures/startBg.jpg",
+	"Textures/light.png",
+	"Textures/startButton.png",
+	"Textures/smallStone.png",
+	"Textures/bigStone.png",
+	"Textures/diamond.png",
+	"Textures/gold.png",
+	"Textures/bag.png",
+	"Textures/goalBg.png",
+	"Textures/gameBg.png",
+	"Textures/hook.png",
+	"Textures/line.png",
+	"Textures/sgold.png",
+	"Textures/gameBg1.png",
+	"Textures/gameBg2.png",
+	"Textures/img_duongray.png",
+	"Textures/cot1.png",
+	"Textures/cot2.png",
+	"Textures/img_obj1.png",
+	"Textures/img_obj2.png",
+	"Textures/img_obj3.png",
+	"Textures/img_obj4.png",
+	"Textures/img_obj5.png",
+	"Textures/img_obj6.png",
+	"Textures/img_obj7.png",
+	"Textures/img_obj8.png",
+	"Textures/img_obj9.png",
+	"Textures/img_obj10.png",
+	"Textures/img_obj11.png",
+	"Textures/img_obj12.png"
+};
+
+const char sodFile[][30] = {
+	"Sounds/mouseIn.wav",
+	"Sounds/dig.mp3",
+	"Sounds/explosive.wav",
+	"Sounds/highValue.wav",
+	"Sounds/lowValue.wav",
+	"Sounds/norValue.wav",
+	"Sounds/pull.wav",
+	"Sounds/score1.wav",
+	"Sounds/score2.wav"
+};
+

@@ -27,7 +27,7 @@ MainObject::~MainObject()
     for(int i = 0; i <= 19; i++)
         if(object_[i] != NULL)
         {
-            delete object_[i];
+             SDL_DestroyTexture(object_[i]);
             object_[i] = NULL;
         }
 }
@@ -43,36 +43,36 @@ void MainObject::Show(SDL_Renderer* des)
 {
     if(status_ == -1) /// Chưa làm gì
     {
-        LoadImg("Textures/img_obj1.png", des);
+        LoadImg("textures/img_obj1.png", des);
     }
     else if(status_ == 0) /// Thả câu
     {
-        LoadImg("Textures/img_obj2.png", des);
-        LoadImg("Text ures/img_obj3.png", des);
-        LoadImg("Textures/img_obj4.png", des);
-        LoadImg("Textures/img_obj5.png", des);
-        LoadImg("Textures/img_obj6.png", des);
-        LoadImg("Textures/img_obj7.png", des);
-        LoadImg("Textures/img_obj8.png", des);
-        LoadImg("Textures/img_obj9.png", des);
-        LoadImg("Textures/img_obj10.png", des);
-        LoadImg("Textures/img_obj11.png", des);
-        LoadImg("Textures/img_obj12.png", des);
+        LoadImg("textures/img_obj2.png", des);
+        LoadImg("text ures/img_obj3.png", des);
+        LoadImg("textures/img_obj4.png", des);
+        LoadImg("textures/img_obj5.png", des);
+        LoadImg("textures/img_obj6.png", des);
+        LoadImg("textures/img_obj7.png", des);
+        LoadImg("textures/img_obj8.png", des);
+        LoadImg("textures/img_obj9.png", des);
+        LoadImg("textures/img_obj10.png", des);
+        LoadImg("textures/img_obj11.png", des);
+        LoadImg("textures/img_obj12.png", des);
     }
     else                    /// Kéo câu
     {
-        LoadImg("Textures/img_obj13.png", des);
-        LoadImg("Textures/img_obj14.png", des);
-        LoadImg("Textures/img_obj15.png", des);
-        LoadImg("Textures/img_obj16.png", des);
-        LoadImg("Textures/img_obj17.png", des);
-        LoadImg("Textures/img_obj18.png", des);
-        LoadImg("Textures/img_obj19.png", des);
-        LoadImg("Textures/img_obj20.png", des);
-        LoadImg("Textures/img_obj21.png", des);
-        LoadImg("Textures/img_obj22.png", des);
-        LoadImg("Textures/img_obj23.png", des);
-        LoadImg("Textures/img_obj24.png", des);
+        LoadImg("textures/img_obj13.png", des);
+        LoadImg("textures/img_obj14.png", des);
+        LoadImg("textures/img_obj15.png", des);
+        LoadImg("textures/img_obj16.png", des);
+        LoadImg("textures/img_obj17.png", des);
+        LoadImg("textures/img_obj18.png", des);
+        LoadImg("textures/img_obj19.png", des);
+        LoadImg("textures/img_obj20.png", des);
+        LoadImg("textures/img_obj21.png", des);
+        LoadImg("textures/img_obj22.png", des);
+        LoadImg("textures/img_obj23.png", des);
+        LoadImg("textures/img_obj24.png", des);
     }
     rect_.x = x_pos_;
     rect_.y = y_pos_;

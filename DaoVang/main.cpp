@@ -34,7 +34,6 @@ bool readyAnimation()
 	buttonClip[1].y = 43;
 	buttonClip[1].w = 160;
 	buttonClip[1].h = 55;
-
 	startButton.SetRect(265, 170, 160, 43);
 
 	while(running)
@@ -120,7 +119,7 @@ unsigned int getNumDigit(int num)
 }
 void setGoal(int goal)
 {
-    TTF_Font* font_game = TTF_OpenFont("Font/uvndaLat.ttf", 100);
+    TTF_Font* font_game = TTF_OpenFont("font/uvndaLat.ttf", 100);
     bool running = true;
     BaseObject goalBg;
     TextObject goalGrade;
@@ -272,7 +271,7 @@ double getAlw(int resId)
 
 int gameMain(levelInfo* level)
 {
-    TTF_Font* font_game = TTF_OpenFont("Font/VTIMESI.TTF", 40);
+    TTF_Font* font_game = TTF_OpenFont("font/VTIMESI.TTF", 40);
     BaseObject gameBg, resTexture[level->totalRes], hook, line, duongray, cot1, cot2, obj[30];
     TextObject timeText, levelText, goalText, gradeText;
     SDL_Point minerPin, hookPin, linePin;
@@ -500,10 +499,10 @@ void startGame()
 int main(int argc, char* argv[]){
     initSDL();
 
-    SDL_Surface* icon = IMG_Load("Textures/icon.png");
+    SDL_Surface* icon = IMG_Load("textures/icon.png");
     SDL_SetWindowIcon(g_window, icon);
-    //if(!readyAnimation()) return 0;
-    //else
+    if(!readyAnimation()) return 0;
+    else
         startGame();
 
     SDL_FreeSurface(icon);

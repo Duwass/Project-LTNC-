@@ -1,6 +1,6 @@
 #include "Common_Function.h"
 #include "SDL_utils.h"
-#include "gameMain.h"
+
 using namespace std;
 
 bool mouseInside(SDL_Point mouse, SDL_Rect area)
@@ -14,7 +14,7 @@ bool readyAnimation()
 {
     BaseObject light, startBg, startButton;
 	SDL_Rect lightRect, buttonRect, buttonClip[2];
-	Mix_Chunk *mouseIn;
+	Mix_Chunk* mouseIn;
 	double lightRadius = 200.0;
 	bool running = true, increase = false;
 	bool mouseOver = 0;
@@ -34,6 +34,7 @@ bool readyAnimation()
 	buttonClip[1].y = 43;
 	buttonClip[1].w = 160;
 	buttonClip[1].h = 55;
+
 	startButton.SetRect(265, 170, 160, 43);
 
 	while(running)
@@ -119,7 +120,8 @@ unsigned int getNumDigit(int num)
 }
 void setGoal(int goal)
 {
-    TTF_Font* font_game = TTF_OpenFont("font/uvndaLat.ttf", 100);
+    TTF_Font* font_game = TTF_OpenFont("Font/uvndaLat.ttf", 100);
+    Mix_Chunk* level = Mix_LoadWAV(sodFile[ID_LEVEL]);
     bool running = true;
     BaseObject goalBg;
     TextObject goalGrade;
@@ -135,6 +137,7 @@ void setGoal(int goal)
     goalGrade.LoadFromRenderText(font_game, g_screen);
     goalGrade.SetValue(20 * (getNumDigit(goal) + 1), 70);
 
+    Mix_PlayChannel(-1, level, 0);
     while(running)
     {
         while(SDL_PollEvent(&g_event))
@@ -142,16 +145,46 @@ void setGoal(int goal)
 
         SDL_RenderClear(g_screen);
         goalBg.Render(g_screen, NULL);
-        goalGrade.RenderText(g_screen, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 30);
+        goalGrade.RenderText(g_screen, SCREEN_WIDTH / 2 + 45, SCREEN_HEIGHT / 2 - 30);
         SDL_RenderPresent(g_screen);
 
         if(++frames >= FPS) running = false;
 
     }
 
-    SDL_Delay(1400);
+    SDL_Delay(1800);
     goalBg.Free();
     goalGrade.Free();
+    Mix_FreeChunk(level);
+}
+// Thêm vào phần khai báo ở đầu file (sau các khai báo khác)
+const char* VICTORY_IMAGE = "Textures/victory.png";
+// Thêm hàm hiển thị màn hình chiến thắng
+void showVictoryScreen()
+{
+    BaseObject victoryImage;
+    Mix_Chunk* victorySound = Mix_LoadWAV(sodFile[ID_FINISH]);
+    
+    victoryImage.LoadImg(VICTORY_IMAGE, g_screen);
+    
+    // Hiển thị hình ảnh chiến thắng ở giữa màn hình
+    victoryImage.SetRect(SCREEN_WIDTH / 2 - victoryImage.GetRect().w / 2, 
+                         SCREEN_HEIGHT / 2 - victoryImage.GetRect().h / 2);
+    
+    // Phát âm thanh chiến thắng
+    Mix_PlayChannel(-1, victorySound, 0);
+    
+    // Render hình ảnh
+    SDL_RenderClear(g_screen);
+    victoryImage.Render(g_screen, NULL);
+    SDL_RenderPresent(g_screen);
+    
+    // Chờ người chơi nhấn phím
+    waitUntilKeyPressed();
+    
+    // Giải phóng tài nguyên
+    victoryImage.Free();
+    Mix_FreeChunk(victorySound);
 }
 levelInfo* getLevel(int lvl)
 {
@@ -159,7 +192,7 @@ levelInfo* getLevel(int lvl)
     {
         levelInfo* currentLvl = (levelInfo *)malloc(sizeof(levelInfo));
         currentLvl->level = lvl;
-        currentLvl->levelGoal = 650;
+        currentLvl->levelGoal = 1;
         currentLvl->totalRes = 8;
 
         resPos* res = (resPos* )malloc(sizeof(resPos) * currentLvl->totalRes);
@@ -189,8 +222,8 @@ levelInfo* getLevel(int lvl)
     {
         levelInfo* currentLvl = (levelInfo *)malloc(sizeof(levelInfo));
         currentLvl->level = lvl;
-        currentLvl->levelGoal = 1200;
-        currentLvl->totalRes = 10;
+        currentLvl->levelGoal = 2;
+        currentLvl->totalRes = 13;
 
         resPos* res = (resPos* )malloc(sizeof(resPos) * currentLvl->totalRes);
         res[0].id = ID_BSTONE;
@@ -198,33 +231,123 @@ levelInfo* getLevel(int lvl)
         res[1].id = ID_BGOLD;
         res[1].position = {1000, 450};
         res[2].id = ID_SGOLD;
-        res[2].position = {300, 500};   
+        res[2].position = {300, 500};
         res[3].id = ID_SSTONE;
         res[3].position = {250, 250};
         res[4].id = ID_BGOLD;
         res[4].position = {100, 400};
-        res[5].id = ID_SGOLD;
-        res[5].position = {350, 200};
+        res[5].id = ID_DIAMOND;
+        res[5].position = {150, 600};
         res[6].id = ID_SGOLD;
         res[6].position = {500, 230};
         res[7].id = ID_SSTONE;
-        res[7].position = {700, 400};
-        res[8].id = ID_SSTONE;
-        res[8].position = {700, 400};
-        res[9].id = ID_SSTONE;
-        res[9].position = {700, 400};
+        res[7].position = {600, 200};
+        res[8].id = ID_BSTONE;
+        res[8].position = {400, 300};
+        res[9].id = ID_BAG;
+        res[9].position = {650, 650};
+        res[10].id = ID_SGOLD;
+        res[10].position = {600, 550};
+        res[11].id = ID_SGOLD;
+        res[11].position = {650, 580};
+        res[12].id = ID_SGOLD;
+        res[12].position = {580, 490};
 
         currentLvl->reses = res;
 
-        currentLvl->idBg = ID_GAMEBG1;
+        currentLvl->idBg = ID_GAMEBG2;
+        return currentLvl;
+    }
+    else if(lvl == 3)
+    {
+        levelInfo* currentLvl = (levelInfo *)malloc(sizeof(levelInfo));
+        currentLvl->level = lvl;
+        currentLvl->levelGoal = 3;
+        currentLvl->totalRes = 17;
+
+        resPos* res = (resPos* )malloc(sizeof(resPos) * currentLvl->totalRes);
+        res[0].id = ID_SSTONE;
+        res[0].position = {900, 600};
+        res[1].id = ID_SSTONE;
+        res[1].position = {1000, 650};
+        res[2].id = ID_SSTONE;
+        res[2].position = {1000, 550};
+        res[3].id = ID_DIAMOND;
+        res[3].position = {980, 620};
+        res[4].id = ID_BGOLD;
+        res[4].position = {100, 400};
+        res[5].id = ID_SGOLD;
+        res[5].position = {150, 600};
+        res[6].id = ID_BGOLD;
+        res[6].position = {1000, 230};
+        res[7].id = ID_BSTONE;
+        res[7].position = {1020, 380};
+        res[8].id = ID_BSTONE;
+        res[8].position = {250, 380};
+        res[9].id = ID_SGOLD;
+        res[9].position = {450, 450};
+        res[10].id = ID_SGOLD;
+        res[10].position = {600, 600};
+        res[11].id = ID_SGOLD;
+        res[11].position = {759, 580};
+        res[12].id = ID_SGOLD;
+        res[12].position = {900, 200};
+        res[13].id = ID_SGOLD;
+        res[13].position = {170, 200};
+        res[14].id = ID_BGOLD;
+        res[14].position = {300, 580};
+        res[15].id = ID_SGOLD;
+        res[15].position = {450, 320};
+        res[16].id = ID_SGOLD;
+        res[16].position = {700, 300};
+
+        currentLvl->reses = res;
+
+        currentLvl->idBg = ID_GAMEBG3;
         return currentLvl;
     }
     return NULL;
 }
-void gameOver(bool win)
+unsigned int userGrade = 0;
+void gameOver(bool win, int levelNum)
 {
-    if(win == true) std::cout << "You Win ";
-    else std::cout << "You Lost ";
+    TTF_Font* font_game = TTF_OpenFont("Font/VTIMESI.TTF", 70);
+    BaseObject nextLevel, bangLevel;
+    TextObject Score, level;
+
+    Score.SetText("Your score: " + to_string(userGrade));
+    Score.SetColor(TextObject::WHITE_TEXT);
+    Score.LoadFromRenderText(font_game, g_screen);
+    Score.SetValue(20 * (getNumDigit(userGrade) + 13), 70);
+
+    level.SetText("Level: " + to_string(levelNum));
+    level.SetColor(TextObject::RED_TEXT);
+    level.LoadFromRenderText(font_game, g_screen);
+    level.SetValue(20 * (getNumDigit(levelNum) + 8), 70);
+
+    bangLevel.LoadImg(imgFile[ID_BANGLEVEL], g_screen);
+    bangLevel.SetRect(SCREEN_WIDTH / 2 - 60, 0);
+
+    if(win == 0)
+    {
+        nextLevel.LoadImg(imgFile[ID_BGFAIL], g_screen);
+    }
+    else
+    {
+        nextLevel.LoadImg(imgFile[ID_BGWIN], g_screen);
+    }
+    Mix_Chunk* finish = Mix_LoadWAV(sodFile[ID_FINISH]);
+    Mix_PlayChannel(-1, finish, 0);
+    nextLevel.Render(g_screen, NULL);
+    Score.RenderText(g_screen, SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2);
+    bangLevel.Render(g_screen, NULL);
+    level.RenderText(g_screen, SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 - 100);
+    SDL_RenderPresent(g_screen);
+    waitUntilKeyPressed();
+    bangLevel.Free();
+    Score.Free();
+    nextLevel.Free();
+    Mix_FreeChunk(finish);
 }
 bool rectImpact(SDL_Rect a, SDL_Rect b, double alw)
 {
@@ -271,17 +394,26 @@ double getAlw(int resId)
 
 int gameMain(levelInfo* level)
 {
-    TTF_Font* font_game = TTF_OpenFont("font/VTIMESI.TTF", 40);
-    BaseObject gameBg, resTexture[level->totalRes], hook, line, duongray, cot1, cot2, obj[30];
+    TTF_Font* font_game = TTF_OpenFont("Font/VTIMESI.TTF", 40);
+    BaseObject gameBg, resTexture[level->totalRes], hook, line, duongray, cot1, cot2, obj[30], pause[2], reload;
     TextObject timeText, levelText, goalText, gradeText;
     SDL_Point minerPin, hookPin, linePin;
     resProperties resProp;
     int startTime, levelTime, hookTimer, lineTimer, objTimer;
-    int catchedRes = 0, userGrade = 0;
-    bool running = true, hookDown = false, hookGoRight = true, hookBack = false;
+    int catchedRes = 0;
+    unsigned int userGradeSave = userGrade;
+    bool running = true, hookDown = false, hookGoRight = true, hookBack = false, checkReload = false;
     levelTime = objTimer = SDL_GetTicks();
     std::string levelStr = "", goalStr = "$" + std::to_string(level->levelGoal);
     double hookAngle = 20.0, lineLen = 0.0;
+
+    for(int i = 0; i <= 1; i++)
+    {
+        pause[i].LoadImg(imgFile[ID_PAUSE1 + i], g_screen);
+        pause[i].SetRect(1200, 5, 60, 60);
+    }
+    reload.LoadImg(imgFile[ID_RELOAD], g_screen);
+    reload.SetRect(1200, 70, 60, 60);
 
     gameBg.LoadImg(imgFile[level->idBg], g_screen);
     hook.LoadImg(imgFile[ID_HOOK], g_screen);
@@ -332,18 +464,46 @@ int gameMain(levelInfo* level)
 	linePin.x = 2;
 	linePin.y = 0;
 
-    int id_O = 0;
+    Mix_Chunk* lastart = Mix_LoadWAV(sodFile[ID_LASTART]);
+    Mix_Chunk* laregeGold = Mix_LoadWAV(sodFile[ID_LARGEGOLD]);
+    Mix_Chunk* select = Mix_LoadWAV(sodFile[ID_SELECT]);
+    Mix_Chunk* lowValue = Mix_LoadWAV(sodFile[ID_LOWVALUE]);
+    Mix_Chunk* norValue = Mix_LoadWAV(sodFile[ID_NORVALUE]);
+    Mix_Chunk* score = Mix_LoadWAV(sodFile[ID_SCORE]);
+    Mix_Chunk* kimCuong = Mix_LoadWAV(sodFile[ID_KC]);
+
+    int id_O = 0, timePause = 0;
     while(running)
     {
         char timeStr[3] = { 0 };
         startTime = SDL_GetTicks();
-        if(startTime - levelTime > 60000) running = false;
+        if(startTime - levelTime - timePause > 60000) running = false;
         while(SDL_PollEvent(&g_event))
         {
             if(g_event.type == SDL_QUIT) running = false;
             if(g_event.type == SDL_KEYDOWN)
                 if((g_event.key.keysym.sym == SDLK_DOWN || g_event.key.keysym.sym == SDLK_SPACE) && !hookDown)
                     hookDown = true;
+            if(g_event.type == SDL_MOUSEBUTTONDOWN)
+            {
+                SDL_Point mouse;
+                SDL_GetMouseState(&mouse.x, &mouse.y);
+                if(mouseInside(mouse, pause[0].GetRect()))
+                {
+                    pause[1].Render(g_screen, NULL);
+                    SDL_RenderPresent(g_screen);
+                    Mix_PlayChannel(-1, select, 0);
+                    int TimeP = SDL_GetTicks();
+                    waitUntilKeyPressed();
+                    timePause += SDL_GetTicks() - TimeP;
+
+                }
+                if(mouseInside(mouse, reload.GetRect()))
+                {
+                    checkReload = true;
+                    running = false;
+                }
+            }
         }
         if(!hookDown)
         {
@@ -372,6 +532,7 @@ int gameMain(levelInfo* level)
                     if(id_O > 23) id_O = 0;
                 }
             else if(!hookBack) id_O = 8;
+
             if(SDL_GetTicks() - lineTimer > 15)
             {
                 lineTimer = SDL_GetTicks();
@@ -395,12 +556,16 @@ int gameMain(levelInfo* level)
                 }
                 if(lineLen < 0.0) lineLen = 0.0;
             }
+            if(!hookBack && hookDown && Mix_Playing(0) == 0) Mix_PlayChannel(0, lastart, 0);
             if(lineLen <= 1.0)
             {
                 hookDown = hookBack = false;
                 userGrade += resProp.score;
                 resProp.setId(-1);
-                if(catchedRes != -1) resTexture[catchedRes].Free();
+                if(catchedRes != -1) {
+                        resTexture[catchedRes].Free();
+                        Mix_PlayChannel(0, score, 0);
+                }
                 catchedRes = -1;
             }
             if(lineLen >= 650.0) hookBack = true;
@@ -423,12 +588,14 @@ int gameMain(levelInfo* level)
         line.SetRect(lineRect.x, lineRect.y, lineRect.w, lineRect.h);
 
         timeText.Free();
-        timeText.SetText(to_string(60 - (startTime - levelTime) / 1000));
+        timeText.SetText(to_string(60 - (startTime - levelTime - timePause) / 1000));
         timeText.SetColor(TextObject::RED_TEXT);
         timeText.LoadFromRenderText(font_game, g_screen);
         timeText.SetValue(26, 40);
 
         gameBg.Render(g_screen, NULL);
+        pause[0].Render(g_screen, NULL);
+        reload.Render(g_screen, NULL);
         duongray.Render(g_screen, NULL);
         cot1.Render(g_screen, NULL);
         cot2.Render(g_screen, NULL);
@@ -453,12 +620,18 @@ int gameMain(levelInfo* level)
 				{
 					catchedRes = i;
 					resProp.setId(level->reses[i].id);
+					if(level->reses[i].id == ID_BGOLD) Mix_PlayChannel(1, laregeGold, 0);
+					if(level->reses[i].id == ID_BSTONE) Mix_PlayChannel(1, lowValue, 0);
+					if(level->reses[i].id == ID_DIAMOND) Mix_PlayChannel(1, kimCuong, 0);
+					if(Mix_Playing(1) == 0) Mix_PlayChannel(1, norValue, 0);
 					hookBack = true;
 					printf("Catched!\n");
 					break;
                 }
             }
         }
+        if(PRE_FRAME_TICKS > (SDL_GetTicks() - startTime))
+			SDL_Delay(PRE_FRAME_TICKS - (SDL_GetTicks() - startTime));
     }
 
     for(int i = 0; i < level->totalRes; i++) resTexture[i].Free();
@@ -466,17 +639,31 @@ int gameMain(levelInfo* level)
     line.Free();
     hook.Free();
     gameBg.Free();
+    pause[0].Free();    pause[1].Free();
+    reload.Free();
     duongray.Free();
     cot1.Free();
     cot2.Free();
     timeText.Free();
     levelText.Free();
+    Mix_FreeChunk(lastart);
+    Mix_FreeChunk(lowValue);
+    Mix_FreeChunk(kimCuong);
+    Mix_FreeChunk(laregeGold);
+    Mix_FreeChunk(lastart);
+    Mix_FreeChunk(select);
+    Mix_FreeChunk(score);
+    if(checkReload)
+    {
+        userGrade = userGradeSave;
+        gameMain(level);
+    }
     return userGrade;
 }
 void startGame()
 {
     int lvlNum = 0;
-	bool win = false;
+    bool win = false;
 	levelInfo* lvl = NULL;
     while(true)
     {
@@ -484,14 +671,22 @@ void startGame()
         if(lvl == NULL)
         {
             win = true;
-            gameOver(win);
+            gameOver(win, lvlNum - 1);
             break;
         }
         setGoal(lvl->levelGoal);
         if(gameMain(lvl) <= lvl->levelGoal)
         {
-            gameOver(win);
+            gameOver(win, lvlNum);
             break;
+        }
+        else {
+            gameOver(true, lvlNum);
+            // Thêm logic hiển thị màn hình chiến thắng sau khi hoàn thành cấp độ 3
+            if(lvlNum == 3) {
+                showVictoryScreen();
+                break; // Kết thúc game sau khi hoàn thành cấp độ 3
+            }
         }
         destroyLevel(lvl);
     }
@@ -499,12 +694,13 @@ void startGame()
 int main(int argc, char* argv[]){
     initSDL();
 
-    SDL_Surface* icon = IMG_Load("textures/icon.png");
+    SDL_Surface* icon = IMG_Load("Textures/icon.png");
     SDL_SetWindowIcon(g_window, icon);
-    if(!readyAnimation()) return 0;
-    else
+    while(true)
+    {
+        if(!readyAnimation()) break;
         startGame();
-
+    }
     SDL_FreeSurface(icon);
     quitSDL();
     return 0;

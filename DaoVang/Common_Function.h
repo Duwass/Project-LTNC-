@@ -3,23 +3,22 @@
 #define COMMON_FUNCTION_H_
 
 #include <bits/stdc++.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_render.h>
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
+#include <SDL_ttf.h>
 
 #include "Data.h"
 #include "BaseObject.h"
 #include "TextObject.h"
 #include "resProperties.h"
 
-#define ID_DIAMOND_ALW	1.3
-#define ID_SSTONE_ALW	1.5
-#define ID_BSTONE_ALW   1.9
-#define ID_BAG_ALW	1.7
-#define ID_BGOLD_ALW	2.0
-#define ID_SGOLD_ALW    1.0
+#define ID_DIAMOND_ALW	1.2
+#define ID_SSTONE_ALW	1.3
+#define ID_BSTONE_ALW   1.5
+#define ID_BAG_ALW	1.6
+#define ID_BGOLD_ALW	1.6
+#define ID_SGOLD_ALW    0.9
 
 
 static SDL_Window* g_window = NULL;
@@ -52,7 +51,7 @@ enum resImgId
 	ID_LINE = 11,
 	ID_SGOLD = 12,
 	ID_GAMEBG1 = 13,
-	ID_GAMEBG12 = 14,
+	ID_GAMEBG2 = 14,
 	ID_DUONGRAY = 15,
 	ID_COT1 = 16,
 	ID_COT2 = 17,
@@ -68,21 +67,27 @@ enum resImgId
 	ID_ONGLAO9,
 	ID_ONGLAO10,
 	ID_ONGLAO11,
-	ID_ONGLAO12,
-	ID_HOOK1
+	ID_BGWIN,
+	ID_BGFAIL,
+	ID_BANGLEVEL,
+	ID_PAUSE1,
+	ID_PAUSE2,
+	ID_RELOAD,
+	ID_GAMEBG3
 };
 
 enum resSoundId
 {
 	ID_MOUSEIN = 0,
-	ID_DIG = 1,
-	ID_EXPLOSIVE = 2,
-	ID_HIGHVAL = 3,
-	ID_LOWVAL = 4,
-	ID_NORVAL = 5,
-	ID_PULL = 6,
-	ID_SCORE1 = 7,
-	ID_SCORE2 = 8
+	ID_FINISH,
+	ID_LARGEGOLD,
+	ID_LASTART,
+	ID_LEVEL,
+	ID_SELECT,
+	ID_LOWVALUE,
+	ID_NORVALUE,
+	ID_SCORE,
+	ID_KC
 };
 
 struct resPos

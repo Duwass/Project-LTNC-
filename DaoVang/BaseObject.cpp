@@ -9,14 +9,14 @@ BaseObject:: BaseObject()
     p_object_ = NULL;
 }
 
-BaseObject::~BaseObject()
+BaseObject:: ~BaseObject()
 {
-    if (p_object_ != NULL) {
-        SDL_DestroyTexture(p_object_);
+    if(p_object_ != NULL)
+    {
+        delete p_object_;
         p_object_ = NULL;
     }
 }
-
 
 void BaseObject::LoadImg(const char* path, SDL_Renderer* screen)
 

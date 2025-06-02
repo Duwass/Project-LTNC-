@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Game",
+            "type": "cppvsdbg",  // Hoặc cppdbg cho Linux/Mac
+            "request": "launch",
+            "program": "D:\\BTL_LTNC\\Project-LTNC-\\Gold Digger\\debug\\Gold Digger.exe",  // Đường dẫn tới tệp thực thi game
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "",
+            "MIMode": "gdb",  // Có thể thay đổi thành "cppvsdbg" hoặc "gdb" nếu bạn sử dụng MinGW hoặc GDB.
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "externalConsole": true,  // Mở cửa sổ console khi chạy game
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb",  // Nếu bạn sử dụng GDB (MinGW)
+            "miDebuggerArgs": "",
+            "env": {},
+            "console": "integratedTerminal" // Hoặc "externalTerminal" nếu bạn muốn game chạy trong cửa sổ terminal ngoài
+        }
+    ]
+}
+

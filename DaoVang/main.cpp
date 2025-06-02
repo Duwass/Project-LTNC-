@@ -192,7 +192,7 @@ levelInfo* getLevel(int lvl)
     {
         levelInfo* currentLvl = (levelInfo *)malloc(sizeof(levelInfo));
         currentLvl->level = lvl;
-        currentLvl->levelGoal = 1;
+        currentLvl->levelGoal = 600;
         currentLvl->totalRes = 8;
 
         resPos* res = (resPos* )malloc(sizeof(resPos) * currentLvl->totalRes);
@@ -222,7 +222,7 @@ levelInfo* getLevel(int lvl)
     {
         levelInfo* currentLvl = (levelInfo *)malloc(sizeof(levelInfo));
         currentLvl->level = lvl;
-        currentLvl->levelGoal = 2;
+        currentLvl->levelGoal = 1400;
         currentLvl->totalRes = 13;
 
         resPos* res = (resPos* )malloc(sizeof(resPos) * currentLvl->totalRes);
@@ -262,7 +262,7 @@ levelInfo* getLevel(int lvl)
     {
         levelInfo* currentLvl = (levelInfo *)malloc(sizeof(levelInfo));
         currentLvl->level = lvl;
-        currentLvl->levelGoal = 3;
+        currentLvl->levelGoal = 2000;
         currentLvl->totalRes = 17;
 
         resPos* res = (resPos* )malloc(sizeof(resPos) * currentLvl->totalRes);

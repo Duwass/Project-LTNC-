@@ -44,7 +44,7 @@
 ## Hướng dẫn cài đặt và chạy game
 1. Cài đặt MinGW và các thư viện SDL2, SDL2_image, SDL2_mixer, SDL2_ttf
 2. Clone repository về máy
-3. 3. Mở project trong Visual Studio Code
+3. Mở project trong Visual Studio Code
 4. Sử dụng task "Run Game" đã được cấu hình trong file `.vscode/launch.json` để chạy game
 
 

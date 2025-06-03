@@ -13,7 +13,7 @@ public:
     virtual void LoadImg(std::string path, SDL_Renderer* screen);
     void Show(SDL_Renderer* des);
     void HandleInputAction(SDL_Event events, SDL_Renderer* screen);
-    //void set_clips();
+   
 private:
     double x_val_;
     double y_val_;
@@ -27,4 +27,4 @@ private:
 
     int status_;
 };
-#endif // MAIN_OBJECT_H_
+#endif 

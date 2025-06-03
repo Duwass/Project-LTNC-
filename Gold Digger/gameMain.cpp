@@ -25,13 +25,5 @@ int gameMain(levelInfo* level)
     gameBg.Render(g_screen, NULL);
     SDL_RenderPresent(g_screen);
     gameBg.Free();
-//    levelText.SetText(std::to_string(level->level));
-//    levelText.SetColor(0x21, 0xd0, 0x1d);
-//    levelText.LoadFromRenderText(font_game, g_screen);
-
-
-   // levelText.RenderText(g_screen, 10, 10);
-
-
     return true;
 }

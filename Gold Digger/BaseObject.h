@@ -22,4 +22,4 @@ protected:
     SDL_Texture* p_object_;
 };
 
-#endif // BASE_OBJECT_H_
+#endif 

@@ -682,10 +682,9 @@ void startGame()
         }
         else {
             gameOver(true, lvlNum);
-            // Thêm logic hiển thị màn hình chiến thắng sau khi hoàn thành cấp độ 3
             if(lvlNum == 3) {
                 showVictoryScreen();
-                break; // Kết thúc game sau khi hoàn thành cấp độ 3
+                break; 
             }
         }
         destroyLevel(lvl);

@@ -103,4 +103,4 @@ struct levelInfo {
 	int idBg;
 	struct resPos* reses;
 };
-#endif // COMMON_FUNCTION_H_
+#endif 

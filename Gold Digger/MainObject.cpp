@@ -41,11 +41,11 @@ void MainObject::LoadImg(string path, SDL_Renderer* screen)
 }
 void MainObject::Show(SDL_Renderer* des)
 {
-    if(status_ == -1) /// Chưa làm gì
+    if(status_ == -1) 
     {
         LoadImg("textures/img_obj1.png", des);
     }
-    else if(status_ == 0) /// Thả câu
+    else if(status_ == 0) 
     {
         LoadImg("textures/img_obj2.png", des);
         LoadImg("text ures/img_obj3.png", des);
@@ -59,7 +59,7 @@ void MainObject::Show(SDL_Renderer* des)
         LoadImg("textures/img_obj11.png", des);
         LoadImg("textures/img_obj12.png", des);
     }
-    else                    /// Kéo câu
+    else                    
     {
         LoadImg("textures/img_obj13.png", des);
         LoadImg("textures/img_obj14.png", des);

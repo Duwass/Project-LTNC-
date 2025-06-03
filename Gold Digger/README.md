@@ -1,7 +1,7 @@
 # Gold Digger
 ## Thông tin sinh viên- **Họ và tên:** Trần Khánh Duy
 - **Mã sinh viên:** 22025520
-## Giới thiệu gameGold Digger là game mô phỏng hoạt động đào vàng, nơi người chơi điều khiển móc câu để thu thập các tài nguyên có giá trị như vàng, kim cương và túi tiền, đồng thời tránh các vật thể ít giá trị như đá để đạt được mục tiêu điểm số trong mỗi cấp độ.
+## Game Gold Digger là game mô phỏng hoạt động đào vàng, nơi người chơi điều khiển móc câu để thu thập các tài nguyên có giá trị như vàng, kim cương và túi tiền, đồng thời tránh các vật thể ít giá trị như đá để đạt được mục tiêu điểm số trong mỗi cấp độ.
 ## Ngưỡng điểm tự đánh giá: 8.75/9
 ## Các tính năng đã thực hiện
 ### Yêu cầu cơ bản (7 điểm)

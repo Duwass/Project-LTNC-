@@ -7,8 +7,12 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "D:\\BTL_LTNC\\DaoVang\\DaoVang\\*.cpp",
-                "-ID:\\BTL_LTNC\\DaoVang\\DaoVang\\bin\\Header",
+                "D:\\BTL_LTNC\\ltnc-main\\ltnc-main\\DaoVang\\main.cpp",
+                "D:\\BTL_LTNC\\ltnc-main\\ltnc-main\\DaoVang\\BaseObject.cpp",
+                "D:\\BTL_LTNC\\ltnc-main\\ltnc-main\\DaoVang\\resProperties.cpp",
+                "D:\\BTL_LTNC\\ltnc-main\\ltnc-main\\DaoVang\\TextObject.cpp",
+                "-ID:\\BTL_LTNC\\ltnc-main\\ltnc-main\\DaoVang\\include",
+                "-IC:\\mingw64\\include\\SDL2",
                 "-lmingw32",
                 "-lSDL2main",
                 "-lSDL2",
@@ -16,7 +20,7 @@
                 "-lSDL2_mixer",
                 "-lSDL2_ttf",
                 "-o",
-                "D:\\BTL_LTNC\\DaoVang\\DaoVang\\bin\\Debug\\DaoVang.exe"
+                "D:\\BTL_LTNC\\ltnc-main\\ltnc-main\\DaoVang\\debug\\DaoVang.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -18,4 +18,4 @@ private:
 	double weight;
 };
 
-#endif // RES_PROPERTIES_H_
+#endif 

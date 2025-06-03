@@ -40,4 +40,4 @@ private:
     int height_;
 
 };
-#endif // TEXT_OBJECT_H
+#endif 

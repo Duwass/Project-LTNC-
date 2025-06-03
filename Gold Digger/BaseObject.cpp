@@ -21,7 +21,6 @@ BaseObject:: ~BaseObject()
 void BaseObject::LoadImg(const char* path, SDL_Renderer* screen)
 
 {
-    //std::cout << path << '/n';
     SDL_Texture* newTexture = NULL;
     SDL_Surface* loadedSurface = IMG_Load( path );
     if( loadedSurface == NULL )

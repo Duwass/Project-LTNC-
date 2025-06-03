@@ -46,5 +46,4 @@ void resProperties::setId(int resId)
 resProperties::resProperties(int resId)
 {
 	this->setId(resId);
-    /// thay bằng return thử
 }

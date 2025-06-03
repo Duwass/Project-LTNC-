@@ -7,4 +7,4 @@
 bool rectImpact(SDL_Rect a, SDL_Rect b, double alw);
 int gameMain(levelInfo* level);
 
-#endif // GAME_MAIN_H_H
+#endif 
